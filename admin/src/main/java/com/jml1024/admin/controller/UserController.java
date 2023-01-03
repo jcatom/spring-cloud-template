@@ -26,6 +26,6 @@ public class UserController {
 
     @GetMapping(value = "/list")
     public List<TestDTO> list() {
-        return restTemplate.getForObject("http://localhost:8080/user/list", List.class);
+        return restTemplate.getForObject("http://user-provider/user/list", List.class);
     }
 }
