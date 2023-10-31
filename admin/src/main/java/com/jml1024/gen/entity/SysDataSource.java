@@ -2,18 +2,20 @@ package com.jml1024.gen.entity;
 
 import java.util.Date;
 
-public class ScheduleJob {
+public class SysDataSource {
     private Integer id;
 
-    private String beanName;
+    private String name;
 
-    private String executeParams;
+    private Boolean enable;
 
-    private String cronExpression;
+    private String username;
 
-    private Byte status;
+    private String password;
 
-    private String jobName;
+    private String url;
+
+    private String driver;
 
     private String remark;
 
@@ -33,44 +35,52 @@ public class ScheduleJob {
         this.id = id;
     }
 
-    public String getBeanName() {
-        return beanName;
+    public String getName() {
+        return name;
     }
 
-    public void setBeanName(String beanName) {
-        this.beanName = beanName == null ? null : beanName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getExecuteParams() {
-        return executeParams;
+    public Boolean getEnable() {
+        return enable;
     }
 
-    public void setExecuteParams(String executeParams) {
-        this.executeParams = executeParams == null ? null : executeParams.trim();
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
-    public String getCronExpression() {
-        return cronExpression;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression == null ? null : cronExpression.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public Byte getStatus() {
-        return status;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public String getJobName() {
-        return jobName;
+    public String getUrl() {
+        return url;
     }
 
-    public void setJobName(String jobName) {
-        this.jobName = jobName == null ? null : jobName.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver == null ? null : driver.trim();
     }
 
     public String getRemark() {
