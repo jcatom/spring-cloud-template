@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jml1024.lottery.core.mapper.WechatJkpExpiryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jml1024.lottery.core.entity.WechatJkpExpiryInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="station_id" jdbcType="VARCHAR" property="stationId" />
+    <result column="safe_area_code" jdbcType="VARCHAR" property="safeAreaCode" />
+    <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+    <result column="plan_code" jdbcType="VARCHAR" property="planCode" />
+    <result column="produce_order" jdbcType="VARCHAR" property="produceOrder" />
+    <result column="ticket_sn" jdbcType="VARCHAR" property="ticketSn" />
+    <result column="win_level" jdbcType="BIT" property="winLevel" />
+    <result column="delive_tax" jdbcType="DECIMAL" property="deliveTax" />
+    <result column="win_prize" jdbcType="DECIMAL" property="winPrize" />
+    <result column="station_amount" jdbcType="DECIMAL" property="stationAmount" />
+    <result column="error_message" jdbcType="VARCHAR" property="errorMessage" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, order_no, station_id, safe_area_code, plan_name, plan_code, produce_order, 
+    ticket_sn, win_level, delive_tax, win_prize, station_amount, error_message, status, 
+    create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wechat_jkp_expiry_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wechat_jkp_expiry_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wechat_jkp_expiry_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfoExample">
+    delete from wechat_jkp_expiry_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfo">
+    insert into wechat_jkp_expiry_info (id, user_id, order_no, 
+      station_id, safe_area_code, plan_name, 
+      plan_code, produce_order, ticket_sn, 
+      win_level, delive_tax, win_prize, 
+      station_amount, error_message, status, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{stationId,jdbcType=VARCHAR}, #{safeAreaCode,jdbcType=VARCHAR}, #{planName,jdbcType=VARCHAR}, 
+      #{planCode,jdbcType=VARCHAR}, #{produceOrder,jdbcType=VARCHAR}, #{ticketSn,jdbcType=VARCHAR}, 
+      #{winLevel,jdbcType=BIT}, #{deliveTax,jdbcType=DECIMAL}, #{winPrize,jdbcType=DECIMAL}, 
+      #{stationAmount,jdbcType=DECIMAL}, #{errorMessage,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfo">
+    insert into wechat_jkp_expiry_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="stationId != null">
+        station_id,
+      </if>
+      <if test="safeAreaCode != null">
+        safe_area_code,
+      </if>
+      <if test="planName != null">
+        plan_name,
+      </if>
+      <if test="planCode != null">
+        plan_code,
+      </if>
+      <if test="produceOrder != null">
+        produce_order,
+      </if>
+      <if test="ticketSn != null">
+        ticket_sn,
+      </if>
+      <if test="winLevel != null">
+        win_level,
+      </if>
+      <if test="deliveTax != null">
+        delive_tax,
+      </if>
+      <if test="winPrize != null">
+        win_prize,
+      </if>
+      <if test="stationAmount != null">
+        station_amount,
+      </if>
+      <if test="errorMessage != null">
+        error_message,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null">
+        #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="safeAreaCode != null">
+        #{safeAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planName != null">
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planCode != null">
+        #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="produceOrder != null">
+        #{produceOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketSn != null">
+        #{ticketSn,jdbcType=VARCHAR},
+      </if>
+      <if test="winLevel != null">
+        #{winLevel,jdbcType=BIT},
+      </if>
+      <if test="deliveTax != null">
+        #{deliveTax,jdbcType=DECIMAL},
+      </if>
+      <if test="winPrize != null">
+        #{winPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="stationAmount != null">
+        #{stationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfoExample" resultType="java.lang.Long">
+    select count(*) from wechat_jkp_expiry_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wechat_jkp_expiry_info
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=BIGINT},
+      </if>
+      <if test="row.userId != null">
+        user_id = #{row.userId,jdbcType=BIGINT},
+      </if>
+      <if test="row.orderNo != null">
+        order_no = #{row.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="row.stationId != null">
+        station_id = #{row.stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.safeAreaCode != null">
+        safe_area_code = #{row.safeAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.planName != null">
+        plan_name = #{row.planName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.planCode != null">
+        plan_code = #{row.planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.produceOrder != null">
+        produce_order = #{row.produceOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="row.ticketSn != null">
+        ticket_sn = #{row.ticketSn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.winLevel != null">
+        win_level = #{row.winLevel,jdbcType=BIT},
+      </if>
+      <if test="row.deliveTax != null">
+        delive_tax = #{row.deliveTax,jdbcType=DECIMAL},
+      </if>
+      <if test="row.winPrize != null">
+        win_prize = #{row.winPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="row.stationAmount != null">
+        station_amount = #{row.stationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="row.errorMessage != null">
+        error_message = #{row.errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="row.status != null">
+        status = #{row.status,jdbcType=BIT},
+      </if>
+      <if test="row.createTime != null">
+        create_time = #{row.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updateTime != null">
+        update_time = #{row.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wechat_jkp_expiry_info
+    set id = #{row.id,jdbcType=BIGINT},
+      user_id = #{row.userId,jdbcType=BIGINT},
+      order_no = #{row.orderNo,jdbcType=VARCHAR},
+      station_id = #{row.stationId,jdbcType=VARCHAR},
+      safe_area_code = #{row.safeAreaCode,jdbcType=VARCHAR},
+      plan_name = #{row.planName,jdbcType=VARCHAR},
+      plan_code = #{row.planCode,jdbcType=VARCHAR},
+      produce_order = #{row.produceOrder,jdbcType=VARCHAR},
+      ticket_sn = #{row.ticketSn,jdbcType=VARCHAR},
+      win_level = #{row.winLevel,jdbcType=BIT},
+      delive_tax = #{row.deliveTax,jdbcType=DECIMAL},
+      win_prize = #{row.winPrize,jdbcType=DECIMAL},
+      station_amount = #{row.stationAmount,jdbcType=DECIMAL},
+      error_message = #{row.errorMessage,jdbcType=VARCHAR},
+      status = #{row.status,jdbcType=BIT},
+      create_time = #{row.createTime,jdbcType=TIMESTAMP},
+      update_time = #{row.updateTime,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfo">
+    update wechat_jkp_expiry_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null">
+        station_id = #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="safeAreaCode != null">
+        safe_area_code = #{safeAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planName != null">
+        plan_name = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planCode != null">
+        plan_code = #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="produceOrder != null">
+        produce_order = #{produceOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketSn != null">
+        ticket_sn = #{ticketSn,jdbcType=VARCHAR},
+      </if>
+      <if test="winLevel != null">
+        win_level = #{winLevel,jdbcType=BIT},
+      </if>
+      <if test="deliveTax != null">
+        delive_tax = #{deliveTax,jdbcType=DECIMAL},
+      </if>
+      <if test="winPrize != null">
+        win_prize = #{winPrize,jdbcType=DECIMAL},
+      </if>
+      <if test="stationAmount != null">
+        station_amount = #{stationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="errorMessage != null">
+        error_message = #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jml1024.lottery.core.entity.WechatJkpExpiryInfo">
+    update wechat_jkp_expiry_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      station_id = #{stationId,jdbcType=VARCHAR},
+      safe_area_code = #{safeAreaCode,jdbcType=VARCHAR},
+      plan_name = #{planName,jdbcType=VARCHAR},
+      plan_code = #{planCode,jdbcType=VARCHAR},
+      produce_order = #{produceOrder,jdbcType=VARCHAR},
+      ticket_sn = #{ticketSn,jdbcType=VARCHAR},
+      win_level = #{winLevel,jdbcType=BIT},
+      delive_tax = #{deliveTax,jdbcType=DECIMAL},
+      win_prize = #{winPrize,jdbcType=DECIMAL},
+      station_amount = #{stationAmount,jdbcType=DECIMAL},
+      error_message = #{errorMessage,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
