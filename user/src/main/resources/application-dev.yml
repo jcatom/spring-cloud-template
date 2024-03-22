@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  application:
+    name: user-provider
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8808
+        namespace: f24d03b5-89b2-43f8-8ab6-ebd36528c4dc
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/testdb?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 12345678

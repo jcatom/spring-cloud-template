@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: @profile.active@
+mybatis:
+  mapper-locations: classpath:com/jml1024/core/persistence/*Mapper.xml
+  type-aliases-package: com.jml1024.core.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jml1024.core.persistence.TPayMapper">
+    <resultMap id="BaseResultMap" type="com.jml1024.core.domain.TPay">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="pay_no" jdbcType="INTEGER" property="payNo" />
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="amount" jdbcType="DECIMAL" property="amount" />
+        <result column="deleted" jdbcType="TINYINT" property="deleted" />
+        <result column="create_date_time" jdbcType="TIMESTAMP" property="createDateTime" />
+        <result column="update_date_time" jdbcType="TIMESTAMP" property="updateDateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        pay_no,
+        order_no,
+        user_id,
+        amount,
+        deleted,
+        create_date_time,
+        update_date_time
+    </sql>
+
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jml1024.core.domain.TPay" useGeneratedKeys="true">
+        INSERT INTO schedule_log (
+            id,
+            pay_no,
+            order_no,
+            user_id,
+            amount,
+            deleted,
+            create_date_time,
+        ) VALUES (
+                     #{id, jdbcType=BIGINT},
+                     #{payNo, jdbcType=INTEGER},
+                     #{orderNo, jdbcType=VARCHAR},
+                     #{userId, jdbcType=BIGINT},
+                     #{amount, jdbcType=DECIMAL},
+                     #{deleted, jdbcType=TINYINT},
+                     #{createDateTime, jdbcType=TIMESTAMP}
+                 )
+    </insert>
+</mapper>
