@@ -77,6 +77,12 @@
             <artifactId>junit-platform-testkit</artifactId>
         </dependency>
         <!--Test Plugin End-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>

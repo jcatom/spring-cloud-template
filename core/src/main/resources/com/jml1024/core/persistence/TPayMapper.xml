@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jml1024.core.persistence.TPayMapper">
     <resultMap id="BaseResultMap" type="com.jml1024.core.domain.TPay">
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="pay_no" jdbcType="INTEGER" property="payNo" />
-        <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
-        <result column="user_id" jdbcType="BIGINT" property="userId" />
-        <result column="amount" jdbcType="DECIMAL" property="amount" />
-        <result column="deleted" jdbcType="TINYINT" property="deleted" />
-        <result column="create_date_time" jdbcType="TIMESTAMP" property="createDateTime" />
-        <result column="update_date_time" jdbcType="TIMESTAMP" property="updateDateTime" />
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="pay_no" jdbcType="INTEGER" property="payNo"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+        <result column="create_date_time" jdbcType="TIMESTAMP" property="createDateTime"/>
+        <result column="update_date_time" jdbcType="TIMESTAMP" property="updateDateTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -23,23 +23,136 @@
         update_date_time
     </sql>
 
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jml1024.core.domain.TPay" useGeneratedKeys="true">
-        INSERT INTO schedule_log (
-            id,
-            pay_no,
-            order_no,
-            user_id,
-            amount,
-            deleted,
-            create_date_time,
-        ) VALUES (
-                     #{id, jdbcType=BIGINT},
-                     #{payNo, jdbcType=INTEGER},
-                     #{orderNo, jdbcType=VARCHAR},
-                     #{userId, jdbcType=BIGINT},
-                     #{amount, jdbcType=DECIMAL},
-                     #{deleted, jdbcType=TINYINT},
-                     #{createDateTime, jdbcType=TIMESTAMP}
-                 )
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jml1024.core.domain.TPay"
+            useGeneratedKeys="true">
+        INSERT INTO t_pay (id,
+                           pay_no,
+                           order_no,
+                           user_id,
+                           amount,
+                           deleted,
+                           create_date_time)
+        VALUES (#{id, jdbcType=BIGINT},
+                #{payNo, jdbcType=INTEGER},
+                #{orderNo, jdbcType=VARCHAR},
+                #{userId, jdbcType=BIGINT},
+                #{amount, jdbcType=DECIMAL},
+                #{deleted, jdbcType=TINYINT},
+                #{createDateTime, jdbcType=TIMESTAMP})
     </insert>
+
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.jml1024.core.domain.TPay" useGeneratedKeys="true">
+        INSERT INTO t_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="payNo != null and payNo != ''">
+                pay_no,
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                order_no,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="createDateTime != null">
+                create_date_time,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="payNo != null and payNo != ''">
+                #{pay_no,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                #{order_no,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{user_id,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                #{amount, jdbcType=DECIMAL},
+            </if>
+            <if test="deleted != null">
+                #{deleted, jdbcType=TINYINT},
+            </if>
+            <if test="createDateTime != null">
+                #{createDateTime, jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.jml1024.core.domain.TPay">
+        UPDATE t_pay SET
+        pay_no = #{payNo, jdbcType=INTEGER},
+        order_no = #{orderNo, jdbcType=VARCHAR},
+        user_id = #{userId, jdbcType=BIGINT},
+        amount = #{amount, jdbcType=DECIMAL},
+        deleted = #{deleted, jdbcType=TINYINT},
+        update_date_time = #{updateDateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jml1024.core.domain.TPay">
+        UPDATE t_pay
+        <set>
+            <if test="payNo != null and payNo != ''">
+                pay_no = #{payNo, jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                #{order_no,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{user_id,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                #{amount, jdbcType=DECIMAL},
+            </if>
+            <if test="deleted != null">
+                #{deleted, jdbcType=TINYINT},
+            </if>
+            <if test="updateDateTime != null">
+                update_date_time = #{updateDateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_pay
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM t_pay WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="delete" parameterType="com.jml1024.core.domain.TPay">
+        DELETE FROM t_pay WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="batchDeleteByPrimaryKey" parameterType="java.util.List">
+        DELETE FROM t_pay WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        DELETE FROM t_pay WHERE id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
 </mapper>

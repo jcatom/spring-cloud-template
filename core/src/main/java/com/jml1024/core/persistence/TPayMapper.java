@@ -1,5 +1,6 @@
 package com.jml1024.core.persistence;
 
+import com.jml1024.common.persistence.BaseMapper;
 import com.jml1024.core.domain.TPay;
 import org.springframework.stereotype.Repository;
 

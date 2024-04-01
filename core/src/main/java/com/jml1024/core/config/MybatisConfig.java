@@ -5,6 +5,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(basePackages = "com")
+@MapperScan(basePackages = "com.jml1024.core")
 public class MybatisConfig {
 }

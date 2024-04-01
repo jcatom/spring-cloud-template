@@ -1,5 +1,7 @@
 package com.jml1024.core.domain;
 
+import com.jml1024.common.domain.BaseEntity;
+
 import java.math.BigDecimal;
 
 /**

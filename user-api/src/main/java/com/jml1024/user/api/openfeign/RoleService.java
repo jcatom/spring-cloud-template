@@ -1,6 +1,5 @@
 package com.jml1024.user.api.openfeign;
 
-import com.jml1024.core.dto.TestDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

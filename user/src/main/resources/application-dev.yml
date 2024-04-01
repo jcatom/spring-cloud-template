@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8808
+        server-addr: 127.0.0.1:8848
         namespace: f24d03b5-89b2-43f8-8ab6-ebd36528c4dc
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
