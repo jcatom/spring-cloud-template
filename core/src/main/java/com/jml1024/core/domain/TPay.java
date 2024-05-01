@@ -1,6 +1,7 @@
 package com.jml1024.core.domain;
 
 import com.jml1024.common.domain.BaseEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 

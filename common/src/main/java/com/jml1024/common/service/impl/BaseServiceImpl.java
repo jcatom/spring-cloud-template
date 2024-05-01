@@ -3,11 +3,12 @@ package com.jml1024.common.service.impl;
 import com.jml1024.common.service.IBaseService;
 import com.jml1024.common.persistence.BaseMapper;
 
+import java.util.Collection;
 import java.util.List;
 
 public class BaseServiceImpl<T, PK> implements IBaseService<T, PK> {
 
-    private BaseMapper mapper;
+    private BaseMapper<T, PK> mapper;
 
     public BaseServiceImpl(BaseMapper mapper) {
         this.mapper = mapper;
@@ -20,41 +21,41 @@ public class BaseServiceImpl<T, PK> implements IBaseService<T, PK> {
 
     @Override
     public int insertSelective(T entity) {
-        return 0;
+        return mapper.insertSelective(entity);
     }
 
     @Override
     public int updateByPrimaryKey(T entity) {
-        return 0;
+        return mapper.updateByPrimaryKey(entity);
     }
 
     @Override
-    public int updateByPrimaryKeySelective(T t) {
-        return 0;
+    public int updateByPrimaryKeySelective(T entity) {
+        return mapper.updateByPrimaryKeySelective(entity);
     }
 
     @Override
     public T selectByPrimaryKey(PK primaryKey) {
-        return null;
+        return mapper.selectByPrimaryKey(primaryKey);
     }
 
     @Override
     public int deleteByPrimaryKey(PK primaryKey) {
-        return 0;
+        return mapper.deleteByPrimaryKey(primaryKey);
     }
 
     @Override
     public int delete(T entity) {
-        return 0;
+        return mapper.delete(entity);
     }
 
     @Override
-    public int batchDeleteByPrimaryKey(List<PK> primaryKeys) {
-        return 0;
+    public int batchDeleteByPrimaryKey(Collection<PK> primaryKeys) {
+        return mapper.batchDeleteByPrimaryKey(primaryKeys);
     }
 
     @Override
-    public int batchDelete(List<T> entities) {
-        return 0;
+    public int batchDelete(Collection<T> entities) {
+        return mapper.batchDelete(entities);
     }
 }

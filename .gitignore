@@ -4,3 +4,4 @@ admin/target/
 config/target/
 user-api/target/
 core/target/
+common/target/

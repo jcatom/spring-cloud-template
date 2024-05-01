@@ -3,7 +3,7 @@
 <mapper namespace="com.jml1024.core.persistence.TPayMapper">
     <resultMap id="BaseResultMap" type="com.jml1024.core.domain.TPay">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="pay_no" jdbcType="INTEGER" property="payNo"/>
+        <result column="pay_no" jdbcType="VARCHAR" property="payNo"/>
         <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="amount" jdbcType="DECIMAL" property="amount"/>
@@ -33,7 +33,7 @@
                            deleted,
                            create_date_time)
         VALUES (#{id, jdbcType=BIGINT},
-                #{payNo, jdbcType=INTEGER},
+                #{payNo, jdbcType=VARCHAR},
                 #{orderNo, jdbcType=VARCHAR},
                 #{userId, jdbcType=BIGINT},
                 #{amount, jdbcType=DECIMAL},
@@ -63,7 +63,7 @@
                 deleted,
             </if>
             <if test="createDateTime != null">
-                create_date_time,
+                create_date_time
             </if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -71,13 +71,13 @@
                 #{id,jdbcType=BIGINT},
             </if>
             <if test="payNo != null and payNo != ''">
-                #{pay_no,jdbcType=VARCHAR},
+                #{payNo,jdbcType=VARCHAR},
             </if>
             <if test="orderNo != null and orderNo != ''">
-                #{order_no,jdbcType=VARCHAR},
+                #{orderNo,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
-                #{user_id,jdbcType=BIGINT},
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="amount != null">
                 #{amount, jdbcType=DECIMAL},
@@ -93,20 +93,20 @@
 
     <update id="updateByPrimaryKey" parameterType="com.jml1024.core.domain.TPay">
         UPDATE t_pay SET
-        pay_no = #{payNo, jdbcType=INTEGER},
+        pay_no = #{payNo, jdbcType=VARCHAR},
         order_no = #{orderNo, jdbcType=VARCHAR},
         user_id = #{userId, jdbcType=BIGINT},
         amount = #{amount, jdbcType=DECIMAL},
         deleted = #{deleted, jdbcType=TINYINT},
         update_date_time = #{updateDateTime,jdbcType=TIMESTAMP}
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.jml1024.core.domain.TPay">
         UPDATE t_pay
         <set>
             <if test="payNo != null and payNo != ''">
-                pay_no = #{payNo, jdbcType=INTEGER},
+                pay_no = #{payNo, jdbcType=VARCHAR},
             </if>
             <if test="orderNo != null and orderNo != ''">
                 #{order_no,jdbcType=VARCHAR},
@@ -124,28 +124,28 @@
                 update_date_time = #{updateDateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM t_pay
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM t_pay WHERE id = #{id,jdbcType=INTEGER}
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_pay WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
     <delete id="delete" parameterType="com.jml1024.core.domain.TPay">
-        DELETE FROM t_pay WHERE id = #{id,jdbcType=INTEGER}
+        DELETE FROM t_pay WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
     <delete id="batchDeleteByPrimaryKey" parameterType="java.util.List">
         DELETE FROM t_pay WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" separator="," close=")">
-            #{id,jdbcType=INTEGER}
+            #{id,jdbcType=BIGINT}
         </foreach>
     </delete>
 

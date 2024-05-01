@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>com.jmll1024</groupId>
-    <artifactId>spring-cloud-template</artifactId>
+    <artifactId>spring-cloud-alibaba-template</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 

@@ -1,5 +1,6 @@
 package com.jml1024.common.service;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface IBaseService <T, PK> {
@@ -30,7 +31,7 @@ public interface IBaseService <T, PK> {
      * @param t
      * @return 更新记录数量
      */
-    int updateByPrimaryKeySelective(T t);
+    int updateByPrimaryKeySelective(T entity);
 
     /**
      * 根据主键查询记录
@@ -59,7 +60,7 @@ public interface IBaseService <T, PK> {
      * @param primaryKeys 主键列表
      * @return 记录删除数量
      */
-    int batchDeleteByPrimaryKey(List<PK> primaryKeys);
+    int batchDeleteByPrimaryKey(Collection<PK> primaryKeys);
 
     /**
      * 根据实体对象列表批量删除记录
@@ -67,5 +68,5 @@ public interface IBaseService <T, PK> {
      * @param entities 实体对象列表
      * @return 记录删除数量
      */
-    int batchDelete(List<T> entities);
+    int batchDelete(Collection<T> entities);
 }

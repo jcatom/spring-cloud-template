@@ -12,7 +12,10 @@ import java.util.Map;
 public class RoleController {
 
     @GetMapping(value = "/list")
-    public Map list() {
+    public Map list() throws Exception {
+        if (true) {
+            throw new Exception();
+        }
         Map map = new HashMap();
         map.put("name", "Evil");
         return map;

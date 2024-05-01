@@ -1,16 +1,21 @@
 package com.jml1024.user.controller;
 
+import com.jml1024.common.response.Result;
 import com.jml1024.core.domain.TPay;
+import com.jml1024.core.dto.TPayDTO;
 import com.jml1024.core.service.TPayService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.jml1024.core.vo.TPayVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(value = "/tpay")
+@Tag(name = "支付api")
 public class TPayController {
     private TPayService tPayService;
 
@@ -18,16 +23,34 @@ public class TPayController {
         this.tPayService = tPayService;
     }
 
-    @GetMapping(value = "/add")
-    public String add() {
+    @GetMapping(value = "/{id}")
+    @Operation(summary = "获取订单信息", description = "根据订单ID获取订单信息")
+    public Result<TPayVO> get(@PathVariable(name = "id") Long id) {
+        TPay tPay = tPayService.selectByPrimaryKey(id);
+        TPayVO vo = new TPayVO();
+        BeanUtils.copyProperties(tPay, vo);
+        Result<TPayVO> result = new Result<>();
+        result.setCode(000000);
+        result.setTimestamp(System.currentTimeMillis());
+        result.setData(vo);
+        return result;
+    }
+
+    @PostMapping(value = "/add")
+    @Operation(summary = "新增", description = "新增支付订单记录")
+    public Result add(@RequestBody TPayDTO dto) {
         TPay tPay = new TPay();
-        tPay.setPayNo("1233333");
-        tPay.setOrderNo("1222222");
-        tPay.setUserId(1L);
-        tPay.setAmount(new BigDecimal("9.99"));
-        tPay.setDeleted(false);
+        BeanUtils.copyProperties(dto, tPay);
         tPay.setCreateDateTime(LocalDateTime.now());
-        tPayService.insert(tPay);
-        return "success";
+        int count = tPayService.insertSelective(tPay);
+        Result result = new Result();
+        result.setTimestamp(System.currentTimeMillis());
+        if (count > 0) {
+            result.setCode(000000);
+        } else {
+            result.setCode(100001);
+            result.setMessage("新增支付订单失败");
+        }
+        return result;
     }
 }
